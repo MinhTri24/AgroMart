@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="app" uuid="4fd2fac3-cb49-4f2e-ae4e-b817c48034ed">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>bcecfee7-f605-4c0a-b463-927599410f8f</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:E:\Projects\.NET\AgroMart\app.db</jdbc-url>

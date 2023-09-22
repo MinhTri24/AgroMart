@@ -1,0 +1,89 @@
+@model System.Collections.Generic.List<AgroMart.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h1 class="text-center"><strong>List of&nbsp;Product</strong></h1>
+    <div class="col-md-12 search-table-col" style="padding-top: 0; margin-top: 0;">
+        <button class="btn btn-primary" type="button">
+            <a class="text-white m-0 font-weight-bold" style="text-decoration: none" asp-controller="Product"
+                asp-action="Create">NEW PRODUCT&nbsp;</a>
+        </button>
+        <div class="table-responsive table table-hover table-bordered results">
+            <table class="table table-hover table-bordered">
+                <thead class="bill-header cs text-center">
+                    <tr>
+                        <th id="trs-hd-1" class="col-lg-1">No.</th>
+                        <th id="trs-hd-2" class="col-lg-1">NAME</th>
+                        <th id="trs-hd-3" class="col-lg-1">DESCRIPTION</th>
+                        <th id="trs-hd-4" class="col-lg-1">PRICE</th>
+                        <th id="trs-hd-5" class="col-lg-1">STOCK</th>
+                        <th id="trs-hd-6" class="col-lg-1">CATEGORY</th>
+                        <th id="trs-hd-7" class="col-lg-1">BRAND</th>
+                        <th id="trs-hd-8" class="col-lg-1">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (var item in Model)
+                    {
+                        @*<tr class="warning no-result">
+                            <td colspan="12"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
+                        </tr>*@
+                        <tr>
+                            <td>
+                                <img height="80" width="80" src="@item.Image" loading="lazy" alt="@item.Name"/>
+                            </td>
+                            <td>
+                                <span style="color: rgb(33, 37, 41); background-color: var(--bs-table-bg);">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </span>
+                                <br>
+                            </td>
+                            <td>
+                                <span style="color: rgb(33, 37, 41); background-color: var(--bs-table-bg);">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </span>
+                                <br>
+                            </td>
+                            <td>
+                                <span style="color: rgb(33, 37, 41); background-color: var(--bs-table-bg);">
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </span>
+                                <br>
+                            </td>
+                            <td>
+                                <span style="color: rgb(33, 37, 41); background-color: var(--bs-table-bg);">
+                                    @Html.DisplayFor(modelItem => item.Stock)
+                                </span>
+                                <br>
+                            </td>
+                            <td>
+                                <span style="color: rgb(33, 37, 41); background-color: var(--bs-table-bg);">
+                                    @Html.DisplayFor(modelItem => item.Category!.Name)
+                                </span>
+                                <br>
+                            </td>
+                            <td>
+                                <span style="color: rgb(33, 37, 41); background-color: var(--bs-table-bg);">
+                                    @Html.DisplayFor(modelItem => item.Brand!.Name)
+                                </span>
+                                <br>
+                            </td>
+                            <td>
+                                <button class="btn btn-secondary" type="button">
+                                    <a class="text-white m-0 font-weight-bold" style="text-decoration: none" asp-action="Update" asp-route-id="@item.Id">UPDATE</a>
+                                </button>
+                                <button class="btn btn-danger" type="button">
+                                    <a class="text-white m-0 font-weight-bold" style="text-decoration: none" asp-action="Delete" asp-route-id="@item.Id">DELETE&nbsp;</a>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
