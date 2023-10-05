@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgroMart.Controllers;
 
+[AutoValidateAntiforgeryToken]
 public class ProductController : Controller
 {
     private readonly ApplicationDbContext _db;
@@ -16,6 +17,8 @@ public class ProductController : Controller
         _db = db;
     }
     
+    [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Index()
     {
         var products = _db.Products.Include(("Category")).Include(("Brand")).ToList();
@@ -23,6 +26,7 @@ public class ProductController : Controller
     }
     
     [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Create()
     {
         var categories = from c in _db.Categories select c.Name;
@@ -37,6 +41,7 @@ public class ProductController : Controller
     }
     
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Create(ProductCreate productCreate)
     {
         Category category = _db.Categories.FirstOrDefault(c => c.Name == productCreate.ProductCategory);
@@ -62,6 +67,7 @@ public class ProductController : Controller
     }
     
     [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Update(int id)
     {
         var products = _db.Products.Find(id);
@@ -88,6 +94,7 @@ public class ProductController : Controller
     }
     
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Update(ProductUpdate productUpdate)
     {
         var product = _db.Products.Find(productUpdate.Id);
@@ -105,8 +112,9 @@ public class ProductController : Controller
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
-
-
+    
+    [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Delete(int id)
     {
         var products = _db.Products.Find(id);

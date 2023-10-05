@@ -3,6 +3,7 @@ using System;
 using AgroMart.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgroMart.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231005133115_AddOrderModel")]
+    partial class AddOrderModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.22");
@@ -71,45 +73,6 @@ namespace AgroMart.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("AgroMart.Models.OrderedItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("OrderedItems");
-                });
-
-            modelBuilder.Entity("AgroMart.Models.OrderOrderedItem", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("OrderedItemId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("OrderId", "OrderedItemId");
-
-                    b.HasIndex("OrderedItemId");
-
-                    b.ToTable("OrderOrderedItems");
                 });
 
             modelBuilder.Entity("AgroMart.Models.Product", b =>
@@ -384,42 +347,6 @@ namespace AgroMart.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AgroMart.Models.OrderedItem", b =>
-                {
-                    b.HasOne("AgroMart.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AgroMart.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("AgroMart.Models.OrderOrderedItem", b =>
-                {
-                    b.HasOne("AgroMart.Models.Order", "Order")
-                        .WithMany("OrderOrderedItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AgroMart.Models.OrderedItem", "OrderedItem")
-                        .WithMany("OrderOrderedItems")
-                        .HasForeignKey("OrderedItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("OrderedItem");
-                });
-
             modelBuilder.Entity("AgroMart.Models.Product", b =>
                 {
                     b.HasOne("AgroMart.Models.Brand", "Brand")
@@ -498,16 +425,6 @@ namespace AgroMart.Data.Migrations
             modelBuilder.Entity("AgroMart.Models.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("AgroMart.Models.Order", b =>
-                {
-                    b.Navigation("OrderOrderedItems");
-                });
-
-            modelBuilder.Entity("AgroMart.Models.OrderedItem", b =>
-                {
-                    b.Navigation("OrderOrderedItems");
                 });
 #pragma warning restore 612, 618
         }

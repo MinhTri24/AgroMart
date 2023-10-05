@@ -1,10 +1,13 @@
 using AgroMart.Data;
 using AgroMart.Models;
 using AgroMart.ViewModels.Brand;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgroMart.Controllers;
 
+[Authorize]
+[AutoValidateAntiforgeryToken]
 public class BrandController : Controller
 {
     private readonly ApplicationDbContext _db;
@@ -14,6 +17,7 @@ public class BrandController : Controller
         _db = db;
     }
     
+    [AutoValidateAntiforgeryToken]
     public IActionResult Index()
     {
         var brands = _db.Brands.ToList();
@@ -21,6 +25,7 @@ public class BrandController : Controller
     }
     
     [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Create()
     {
         BrandCreate brandCreate = new BrandCreate();
@@ -28,6 +33,7 @@ public class BrandController : Controller
     }
     
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Create(BrandCreate brandCreate)
     {
         if (ModelState.IsValid)
@@ -45,6 +51,7 @@ public class BrandController : Controller
     }
     
     [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Update(int id)
     {
         var brands = _db.Brands.Find(id);
@@ -62,6 +69,7 @@ public class BrandController : Controller
     }
     
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Update(BrandUpdate brandUpdate)
     {
         if (ModelState.IsValid)
@@ -80,6 +88,8 @@ public class BrandController : Controller
         return NotFound();
     }
     
+    [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Delete(int id)
     {
         var brands = _db.Brands.Find(id);

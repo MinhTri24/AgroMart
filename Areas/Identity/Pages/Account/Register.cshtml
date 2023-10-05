@@ -33,6 +33,11 @@
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-floating">
+                <input asp-for="Input.ImageUrl" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.ImageUrl"></label>
+                <span asp-validation-for="Input.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>

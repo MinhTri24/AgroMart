@@ -1,10 +1,13 @@
 using AgroMart.Data;
 using AgroMart.Models;
 using AgroMart.ViewModels.Category;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgroMart.Controllers;
 
+[Authorize]
+[AutoValidateAntiforgeryToken]
 public class CategoryController : Controller
 {
     private readonly ApplicationDbContext _db;
@@ -14,6 +17,7 @@ public class CategoryController : Controller
         _db = db;
     }
     
+    [AutoValidateAntiforgeryToken]
     public IActionResult Index()
     {
         var categories = _db.Categories.ToList();
@@ -21,6 +25,7 @@ public class CategoryController : Controller
     }
     
     [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Create()
     {
         CategoryCreate categoryCreate = new CategoryCreate();
@@ -28,6 +33,7 @@ public class CategoryController : Controller
     }
     
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Create(CategoryCreate categoryCreate)
     {
         if (ModelState.IsValid)
@@ -45,6 +51,7 @@ public class CategoryController : Controller
     }
     
     [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Update(int id)
     {
         var categories = _db.Categories.Find(id);
@@ -62,6 +69,7 @@ public class CategoryController : Controller
     }
     
     [HttpPost]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Update(CategoryUpdate categoryUpdate)
     {
         if (ModelState.IsValid)
@@ -79,6 +87,8 @@ public class CategoryController : Controller
         return NotFound();
     }
 
+    [HttpGet]
+    [AutoValidateAntiforgeryToken]
     public IActionResult Delete(int id)
     {
         var category = _db.Categories.Find(id);
